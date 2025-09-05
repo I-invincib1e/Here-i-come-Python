@@ -19,6 +19,20 @@ A simple interactive stopwatch with laps.
 - `reset`: Reset stopwatch and laps
 - `exit`/`q`: Quit and show final time
 
+## Lap Export
+
+When you stop or exit the stopwatch, all recorded laps are automatically saved to a file named **`laps.csv`** in the same folder as the script.  
+
+The file is **overwritten each time** you stop/exit.  
+
+Example `laps.csv`:
+
+```csv
+lap_number,lap_time
+1,00:01:23.123
+2,00:01:45.456
+3,00:02:10.789
+  
 ## Demo
 
 Placeholder for screenshot or GIF. Add your file under `docs/assets/` and link it here.

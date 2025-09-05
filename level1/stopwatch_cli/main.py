@@ -1,14 +1,17 @@
 import time
 from typing import Optional
 import csv
-
+import os
 # Export laps to a CSV file
 def lap_export(laps):
-    with open("laps.csv",mode = "w",newline = "") as file:
+    script_dir = os.path.dirname(os.path.abspath(__file__))  # folder where script is
+    file_path = os.path.join(script_dir, "laps.csv")         # laps.csv in same folder
+    # print(f"Saving laps to: {file_path}")   To check where file is saved
+    with open(file_path, mode="w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(["lap_number", "lap_time"])  # header
-        for i,lap in enumerate(laps):
-            writer.writerow([i+1,format_duration(lap)])
+        for i, lap in enumerate(laps):
+            writer.writerow([i + 1, format_duration(lap)])
 
 
 def format_duration(seconds: float) -> str:
