@@ -1,5 +1,14 @@
 import time
 from typing import Optional
+import csv
+
+# Export laps to a CSV file
+def lap_export(laps):
+    with open("laps.csv",mode = "w",newline = "") as file:
+        writer = csv.writer(file)
+        writer.writerow(["lap_number", "lap_time"])  # header
+        for i,lap in enumerate(laps):
+            writer.writerow([i+1,format_duration(lap)])
 
 
 def format_duration(seconds: float) -> str:
@@ -39,6 +48,8 @@ def stopwatch() -> None:
             else:
                 elapsed += now - start_time
                 start_time = None
+                # Export laps to CSV on stop
+                lap_export(laps)
                 print(f"Stopped at {format_duration(elapsed)}")
         elif cmd == "reset":
             start_time = None
@@ -49,6 +60,7 @@ def stopwatch() -> None:
             if start_time is not None:
                 elapsed += now - start_time
                 start_time = None
+            lap_export(laps)
             print(f"Final time: {format_duration(elapsed)}")
             break
         else:
