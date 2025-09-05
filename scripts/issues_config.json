@@ -1,0 +1,44 @@
+{
+  "issues": [
+    {
+      "title": "Calculator: Add modulo operator %",
+      "labels": "good first issue,enhancement",
+      "body": "See ISSUES_TODO.md (item 1)."
+    },
+    {
+      "title": "Todo CLI: Add edit <id> <new title>",
+      "labels": "good first issue,enhancement",
+      "body": "See ISSUES_TODO.md (item 2)."
+    },
+    {
+      "title": "Stopwatch: Export laps to CSV",
+      "labels": "good first issue,enhancement",
+      "body": "See ISSUES_TODO.md (item 3)."
+    },
+    {
+      "title": "File Organizer: --dry-run-summary",
+      "labels": "good first issue,enhancement",
+      "body": "See ISSUES_TODO.md (item 4)."
+    },
+    {
+      "title": "Quiz Game: Shuffle + optional timer",
+      "labels": "good first issue,enhancement",
+      "body": "See ISSUES_TODO.md (item 5)."
+    },
+    {
+      "title": "Docs: Add screenshots/GIFs for 3 projects",
+      "labels": "good first issue,docs",
+      "body": "See ISSUES_TODO.md (item 6)."
+    },
+    {
+      "title": "Tests: Calculator error paths",
+      "labels": "good first issue,tests",
+      "body": "See ISSUES_TODO.md (item 7)."
+    },
+    {
+      "title": "DSA: Extend arrays tests",
+      "labels": "good first issue,tests",
+      "body": "See ISSUES_TODO.md (item 8)."
+    }
+  ]
+}
