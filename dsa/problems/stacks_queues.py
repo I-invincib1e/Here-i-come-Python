@@ -33,20 +33,37 @@ class MinStack:
 
 
 def daily_temperatures(temperatures: List[int]) -> List[int]:
-    """Find days until warmer temperature.
-    
-    Time: O(n), Space: O(n)
-    Trick: Use monotonic stack to track indices
+    """Find number of days until a warmer temperature for each day.
+
+    Uses a monotonic decreasing stack to efficiently find the next warmer temperature.
+    The stack stores indices of temperatures that haven't found their warmer day yet.
+
+    For each temperature:
+    - While stack has indices with smaller temperatures, pop them and calculate days
+    - Push current index onto stack
+
+    Args:
+        temperatures: Daily temperature readings
+
+    Returns:
+        List where result[i] is days until warmer temperature, or 0 if none
+
+    Time: O(n), Space: O(n) - stack can hold up to n elements
     """
+    # Initialize result array with 0s (default for no warmer temperature)
     result = [0] * len(temperatures)
-    stack = []  # store indices
-    
+    # Stack to store indices of temperatures waiting for warmer days
+    stack = []
+
     for i, temp in enumerate(temperatures):
+        # While stack has temperatures smaller than current, they found their warmer day
         while stack and temperatures[stack[-1]] < temp:
             prev_index = stack.pop()
+            # Calculate days between: current day - previous day
             result[prev_index] = i - prev_index
+        # Push current index onto stack
         stack.append(i)
-    
+
     return result
 
 

@@ -1,6 +1,6 @@
-# Templates
+# Templates: Educational Content Management
 
-This directory contains templates for generating consistent project documentation and code.
+**Tools and templates for maintaining consistent, high-quality educational content** across the Python learning repository. These templates ensure all learning materials follow the same structure and quality standards.
 
 ## Project README Template
 

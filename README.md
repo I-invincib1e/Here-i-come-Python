@@ -1,10 +1,19 @@
-# Python Practice Projects
+# Python Learning Guide: Practice Projects
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 ![Beginner Friendly](https://img.shields.io/badge/beginner-friendly-blue)
+![Educational](https://img.shields.io/badge/educational-learning-orange)
 
-Learn Python by building small, simple programs. Everything runs from the command line and uses the standard library.
+**Master Python programming through hands-on practice.** Build small, focused programs that teach fundamental concepts, best practices, and problem-solving skills. All projects use only the Python standard library for maximum learning value.
+
+## 🎯 Learning Objectives
+
+- **Core Python Skills**: Variables, functions, loops, conditionals, file I/O
+- **Problem Solving**: Break down problems into manageable steps
+- **Code Organization**: Structure programs with clear, readable code
+- **Testing & Debugging**: Write robust code that handles edge cases
+- **Best Practices**: Follow Python conventions and documentation standards
 
 ## Requirements
 

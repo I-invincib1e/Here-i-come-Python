@@ -4,20 +4,37 @@ from typing import Dict, List
 
 
 def is_anagram(s: str, t: str) -> bool:
-    """Check if two strings are anagrams.
-    
-    Time: O(n), Space: O(1) - limited to 26 lowercase letters
-    Trick: Use character frequency counting instead of sorting
+    """Check if two strings are anagrams (contain same characters with same frequencies).
+
+    Anagrams have identical character counts, just rearranged.
+    This solution uses a frequency count array for efficiency.
+
+    Assumes lowercase English letters only (26 characters).
+
+    Args:
+        s: First string
+        t: Second string
+
+    Returns:
+        True if strings are anagrams, False otherwise
+
+    Time: O(n) where n is string length, Space: O(1) - fixed 26-element array
     """
+    # Different lengths can't be anagrams
     if len(s) != len(t):
         return False
-    
-    # Count characters in s, subtract from t
+
+    # Use array to count character frequencies (26 lowercase letters)
     count = [0] * 26
+
+    # Count characters in both strings simultaneously
     for i in range(len(s)):
+        # Increment count for character in s
         count[ord(s[i]) - ord('a')] += 1
+        # Decrement count for character in t
         count[ord(t[i]) - ord('a')] -= 1
-    
+
+    # If all counts are zero, strings have identical character frequencies
     return all(c == 0 for c in count)
 
 
