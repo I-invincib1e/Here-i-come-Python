@@ -1,9 +1,9 @@
 # Code of Conduct
 
-We are committed to a welcoming and inclusive community.
+We keep this space welcoming and helpful.
 
-- Be respectful and considerate.
-- Assume positive intent and be helpful.
-- No harassment, hate speech, or personal attacks.
+- Be respectful
+- Assume positive intent
+- No harassment or personal attacks
 
-If you experience or witness unacceptable behavior, please open an issue or contact the maintainers.
+If something feels off, open an issue or contact the maintainers.

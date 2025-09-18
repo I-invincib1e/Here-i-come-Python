@@ -2,19 +2,30 @@
 
 {{PROJECT_DESCRIPTION}}
 
-## How to Run
+## How It Works
 
-- **Prerequisites**: Python 3.8+
-- **Run**:
-  - Windows PowerShell:
-    - `python .\main.py`
-  - macOS/Linux:
-    - `python3 ./main.py`
+- Problem the program solves
+- Key concepts used (e.g., parsing, file I/O, data structures)
+- Data flow (input → processing → output)
+- Important functions and their roles
+- Edge cases and error handling
 
-{{USAGE_SECTION}}
+## Example
+
+Show a small input and the expected output or interaction transcript.
+
+```text
+> sample interaction or example data
+```
+
+## Internals
+
+- File layout and important modules
+- Algorithms/logic in bullet points
+- Data formats (CSV/JSON) and structure
 
 {{NOTES_SECTION}}
 
-## Demo
+## Demo (optional)
 
-Placeholder for screenshot or GIF. Add your file under `docs/assets/` and link it here.
+Add a screenshot or GIF under `docs/assets/` and link it here.

@@ -1,29 +1,28 @@
 # Contributing
 
-Thanks for helping improve this learning repository! Please keep it beginner-friendly.
+Thanks for helping. Keep things simple and beginner-friendly.
 
-## Getting Started
+## Setup
 
-- Use Python 3.8+.
-- Prefer the standard library; avoid external deps unless essential for learning.
-- Run examples in each project's README.
+- Python 3.8+
+- Prefer the standard library
+
+## How to Contribute
+
+1. Fork and create a feature branch
+2. Make a small, focused change
+3. Run it locally and add/update a short README section if needed
+4. Open a PR and briefly explain what changed
 
 ## Style
 
-- Write clear, readable code with descriptive names.
-- Add type hints for public functions.
-- Keep functions small and focused; avoid deep nesting.
-- Include a short README section for any new project.
+- Clear names and small functions
+- Type hints on public functions
+- Minimal dependencies
 
-## Adding a New Project
+## Add a New Project
 
-1. Create a folder with `main.py` and `README.md`.
-2. Keep it runnable with `python ./<project>/main.py`.
-3. Include minimal data files if needed (e.g., `questions.json`).
-4. Update the top-level README project list.
-
-## Issues and PRs
-
-- Open an issue describing the idea/fix first (optional but helpful).
-- In PRs, show before/after if changing behavior.
-- Keep changes small and scoped.
+1. New folder with `main.py` and `README.md`
+2. Runnable with `python ./<project>/main.py`
+3. Include small data files if needed
+4. Add it to the top-level `README.md`

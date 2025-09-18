@@ -25,7 +25,7 @@ python scripts/generate_readme.py <project_path> templates/project_readme_templa
 
 ```bash
 # Generate README for guess_number project
-python scripts/generate_readme.py level1/guess_number templates/project_readme_template.md
+python scripts/generate_readme.py basic_programs/guess_number templates/project_readme_template.md
 ```
 
 ## Adding New Templates

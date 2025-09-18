@@ -1,31 +1,43 @@
 import subprocess
 import sys
 from pathlib import Path
+from typing import List, Tuple
 
 
-PROJECTS = [
-    # Level 1 - Simple Starters
-    ("1", "level1/guess_number", "Guess the Number"),
-    ("2", "level1/calculator_cli", "Calculator CLI"),
-    ("3", "level1/todo_cli", "Todo CLI"),
-    ("4", "level1/stopwatch_cli", "Stopwatch CLI"),
-    ("5", "level1/rock_paper_scissors", "Rock, Paper, Scissors"),
-    # Level 2 - Uplifted Mid-Level
-    ("6", "level2/tictactoe_ai", "Tic Tac Toe (AI)"),
-    ("7", "level2/expense_tracker", "Expense Tracker"),
-    ("8", "level2/file_organizer", "File Organizer"),
-    ("9", "level2/md_notes", "Markdown Notes"),
-    ("10", "level2/quiz_game", "Quiz Game"),
-]
+def discover_projects(base_dir: Path) -> List[Tuple[str, str, str]]:
+    """Discover projects under base_dir that contain a main.py.
+
+    Returns list of (key, folder, title) sorted by folder name.
+    """
+    entries: List[Tuple[str, str, str]] = []
+    projects = []
+    if not base_dir.exists():
+        return entries
+
+    for sub in sorted(base_dir.iterdir()):
+        if not sub.is_dir():
+            continue
+        script = sub / "main.py"
+        if script.exists():
+            title = sub.name.replace("_", " ").title()
+            projects.append((str(sub), title))
+
+    for idx, (folder, title) in enumerate(projects, start=1):
+        entries.append((str(idx), folder, title))
+
+    return entries
 
 
 def main() -> None:
-    print("Python Practice Projects")
-    print("\nLevel 1 - Simple Starters:")
-    for key, folder, title in PROJECTS[:5]:
-        print(f"  {key}. {title}")
-    print("\nLevel 2 - Uplifted Mid-Level:")
-    for key, folder, title in PROJECTS[5:]:
+    base = Path("basic_programs")
+    projects = discover_projects(base)
+
+    if not projects:
+        print("No projects found under 'basic_programs/'.")
+        return
+
+    print("Python Practice Projects\n")
+    for key, _folder, title in projects:
         print(f"  {key}. {title}")
     print("\nq. Quit\n")
 
@@ -33,13 +45,13 @@ def main() -> None:
     if choice in {"q", "quit", "exit"}:
         return
 
-    for key, folder, _ in PROJECTS:
+    for key, folder, _ in projects:
         if choice == key:
             script = Path(folder) / "main.py"
             if not script.exists():
                 print("Project script not found.")
                 return
-            subprocess.run([sys.executable, str(script)])
+            subprocess.run([sys.executable, str(script)], check=False)
             return
     print("Invalid selection.")
 
