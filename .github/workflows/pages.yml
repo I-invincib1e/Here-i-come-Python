@@ -35,10 +35,24 @@ jobs:
           npm install -g markdown-to-html-cli
           npm install -g @mermaid-js/mermaid-cli
 
+      - name: Force Jekyll bypass and clean setup
+        run: |
+          # Ensure Jekyll bypass
+          touch .nojekyll
+          echo "Jekyll bypass enabled"
+
+          # Clean any existing conflicting files
+          rm -rf docs/ dsa-docs/ _site/
+
       - name: Create documentation site
         run: |
           # Create main directory structure
           mkdir -p docs dsa-docs
+
+          # Ensure Jekyll bypass in all directories
+          touch docs/.nojekyll
+          touch dsa-docs/.nojekyll
+          touch .nojekyll
 
           # Convert main README to HTML
           markdown README.md > docs/index.html
