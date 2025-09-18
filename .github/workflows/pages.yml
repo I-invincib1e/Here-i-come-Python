@@ -24,214 +24,308 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Create index.html from README.md
+      - name: Setup Node.js for MD conversion
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install markdown processing tools
         run: |
-          # Create a simple HTML page from README.md
+          npm install -g markdown-to-html-cli
+          npm install -g @mermaid-js/mermaid-cli
+
+      - name: Create documentation site
+        run: |
+          # Create main directory structure
+          mkdir -p docs dsa-docs
+
+          # Convert main README to HTML
+          markdown README.md > docs/index.html
+
+          # Convert DSA learning materials
+          markdown dsa/README.md > docs/dsa.html
+          markdown dsa/LEARNING_GUIDE.md > docs/dsa-guide.html
+          markdown dsa/arrays.md > dsa-docs/arrays.html
+          markdown dsa/strings.md > dsa-docs/strings.html
+          markdown dsa/hash_maps.md > dsa-docs/hash-maps.html
+          markdown dsa/stacks_queues.md > dsa-docs/stacks-queues.html
+          markdown dsa/recursion.md > dsa-docs/recursion.html
+
+          # Convert other documentation
+          markdown index.md > docs/overview.html
+          markdown basic_programs/README.md > docs/basic-programs.html
+          markdown exercises/README.md > docs/exercises.html
+          markdown games/README.md > docs/games.html
+
+          # Create main index.html with navigation
           cat > index.html << 'EOF'
           <!DOCTYPE html>
           <html lang="en">
           <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Python Learning Guide</title>
+              <title>Python Learning Guide - Complete Programming Education</title>
               <style>
+                  * {
+                      margin: 0;
+                      padding: 0;
+                      box-sizing: border-box;
+                  }
                   body {
                       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                       line-height: 1.6;
-                      max-width: 800px;
-                      margin: 0 auto;
-                      padding: 20px;
                       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                       min-height: 100vh;
                       color: white;
                   }
-                  .container {
-                      background: rgba(255, 255, 255, 0.1);
-                      backdrop-filter: blur(10px);
-                      border-radius: 20px;
-                      padding: 30px;
-                      margin: 20px 0;
-                      border: 1px solid rgba(255, 255, 255, 0.2);
+                  .nav {
+                      background: rgba(0, 0, 0, 0.2);
+                      padding: 1rem;
+                      position: sticky;
+                      top: 0;
+                      z-index: 100;
                   }
-                  h1 {
-                      text-align: center;
-                      font-size: 2.5em;
-                      margin-bottom: 10px;
-                      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                  .nav-container {
+                      max-width: 1200px;
+                      margin: 0 auto;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
                   }
-                  .subtitle {
-                      text-align: center;
-                      font-size: 1.2em;
-                      opacity: 0.9;
-                      margin-bottom: 30px;
+                  .nav-links {
+                      display: flex;
+                      gap: 2rem;
                   }
-                  .quick-start {
-                      background: rgba(255, 255, 255, 0.2);
-                      border-radius: 15px;
-                      padding: 25px;
-                      margin: 20px 0;
-                      border-left: 5px solid #4CAF50;
-                  }
-                  .quick-start h2 {
-                      margin-top: 0;
-                      color: #4CAF50;
-                      font-size: 1.8em;
-                  }
-                  .step {
-                      background: rgba(255, 255, 255, 0.1);
-                      margin: 10px 0;
-                      padding: 15px;
-                      border-radius: 10px;
-                      border-left: 4px solid #2196F3;
-                  }
-                  .step-number {
-                      display: inline-block;
-                      background: #2196F3;
+                  .nav-links a {
                       color: white;
-                      width: 25px;
-                      height: 25px;
-                      border-radius: 50%;
-                      text-align: center;
-                      line-height: 25px;
-                      margin-right: 10px;
-                      font-weight: bold;
-                  }
-                  .github-link {
-                      display: inline-block;
-                      background: #333;
-                      color: white;
-                      padding: 15px 30px;
                       text-decoration: none;
-                      border-radius: 10px;
-                      margin: 20px 0;
-                      font-weight: bold;
+                      padding: 0.5rem 1rem;
+                      border-radius: 5px;
                       transition: background 0.3s;
                   }
-                  .github-link:hover {
-                      background: #555;
-                  }
-                  .features {
-                      display: grid;
-                      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                      gap: 20px;
-                      margin: 30px 0;
-                  }
-                  .feature {
+                  .nav-links a:hover {
                       background: rgba(255, 255, 255, 0.1);
-                      padding: 20px;
-                      border-radius: 10px;
-                      text-align: center;
                   }
-                  .feature h3 {
+                  .hero {
+                      text-align: center;
+                      padding: 4rem 2rem;
+                      max-width: 800px;
+                      margin: 0 auto;
+                  }
+                  .hero h1 {
+                      font-size: 3em;
+                      margin-bottom: 1rem;
+                      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                  }
+                  .hero p {
+                      font-size: 1.3em;
+                      opacity: 0.9;
+                      margin-bottom: 2rem;
+                  }
+                  .cta-button {
+                      display: inline-block;
+                      background: #4CAF50;
+                      color: white;
+                      padding: 1rem 2rem;
+                      text-decoration: none;
+                      border-radius: 10px;
+                      font-weight: bold;
+                      font-size: 1.1em;
+                      transition: background 0.3s;
+                  }
+                  .cta-button:hover {
+                      background: #45a049;
+                  }
+                  .content {
+                      max-width: 1200px;
+                      margin: 0 auto;
+                      padding: 2rem;
+                  }
+                  .grid {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                      gap: 2rem;
+                      margin: 3rem 0;
+                  }
+                  .card {
+                      background: rgba(255, 255, 255, 0.1);
+                      backdrop-filter: blur(10px);
+                      border-radius: 15px;
+                      padding: 2rem;
+                      border: 1px solid rgba(255, 255, 255, 0.2);
+                      transition: transform 0.3s;
+                  }
+                  .card:hover {
+                      transform: translateY(-5px);
+                  }
+                  .card h3 {
                       color: #4CAF50;
-                      margin-top: 0;
+                      margin-bottom: 1rem;
+                      font-size: 1.5em;
+                  }
+                  .card p {
+                      margin-bottom: 1rem;
+                  }
+                  .card-links {
+                      display: flex;
+                      gap: 1rem;
+                      flex-wrap: wrap;
+                  }
+                  .card-links a {
+                      color: #2196F3;
+                      text-decoration: none;
+                      padding: 0.5rem 1rem;
+                      border-radius: 5px;
+                      background: rgba(255, 255, 255, 0.1);
+                      transition: background 0.3s;
+                  }
+                  .card-links a:hover {
+                      background: rgba(255, 255, 255, 0.2);
                   }
                   .learning-path {
                       background: rgba(255, 255, 255, 0.1);
                       border-radius: 15px;
-                      padding: 25px;
-                      margin: 20px 0;
+                      padding: 2rem;
+                      margin: 3rem 0;
                   }
                   .phase {
                       background: rgba(255, 255, 255, 0.1);
-                      margin: 10px 0;
-                      padding: 15px;
+                      margin: 1rem 0;
+                      padding: 1.5rem;
                       border-radius: 10px;
                       border-left: 4px solid #FF9800;
                   }
                   .phase h4 {
-                      margin-top: 0;
                       color: #FF9800;
+                      margin-bottom: 0.5rem;
+                  }
+                  .footer {
+                      text-align: center;
+                      padding: 2rem;
+                      opacity: 0.8;
                   }
               </style>
           </head>
           <body>
-              <div class="container">
-                  <h1>🚀 Python Learning Guide</h1>
-                  <p class="subtitle">Complete Programming Education Through Hands-On Practice</p>
-
-                  <div class="quick-start">
-                      <h2>⚡ Quick Start (5 minutes)</h2>
-                      <div class="step">
-                          <span class="step-number">1</span>
-                          <strong>Install Python</strong> (3.8+): Download from <a href="https://python.org" style="color: #4CAF50;">python.org</a>
-                      </div>
-                      <div class="step">
-                          <span class="step-number">2</span>
-                          <strong>Clone this repo</strong>:<br>
-                          <code style="background: rgba(0,0,0,0.3); padding: 5px; border-radius: 5px;">git clone https://github.com/I-invincib1e/Here-i-come-Python.git</code>
-                      </div>
-                      <div class="step">
-                          <span class="step-number">3</span>
-                          <strong>Run your first program</strong>:<br>
-                          <code style="background: rgba(0,0,0,0.3); padding: 5px; border-radius: 5px;">python basic_programs/guess_number/main.py</code>
-                      </div>
-                      <div class="step">
-                          <span class="step-number">4</span>
-                          <strong>Follow the learning path below to become a Python expert!</strong>
+              <nav class="nav">
+                  <div class="nav-container">
+                      <h2>🐍 Python Learning Guide</h2>
+                      <div class="nav-links">
+                          <a href="#overview">Overview</a>
+                          <a href="#modules">Modules</a>
+                          <a href="#learning-path">Learning Path</a>
+                          <a href="https://github.com/I-invincib1e/Here-i-come-Python">GitHub</a>
                       </div>
                   </div>
+              </nav>
 
-                  <div class="features">
-                      <div class="feature">
-                          <h3>📚 Structured Learning</h3>
-                          <p>4-phase educational journey from beginner to advanced</p>
-                      </div>
-                      <div class="feature">
-                          <h3>🎯 Clear Objectives</h3>
-                          <p>Specific learning goals and measurable outcomes</p>
-                      </div>
-                      <div class="feature">
-                          <h3>🛣️ Guided Path</h3>
-                          <p>Weekly milestones and progress tracking</p>
-                      </div>
-                      <div class="feature">
-                          <h3>🤝 Community</h3>
-                          <p>Collaborative learning and contribution opportunities</p>
-                      </div>
-                  </div>
+              <section class="hero">
+                  <h1>🚀 Master Python Programming</h1>
+                  <p>Complete educational journey from beginner basics to advanced algorithmic thinking through structured, hands-on learning experiences.</p>
+                  <a href="#learning-path" class="cta-button">Start Learning Journey</a>
+              </section>
 
-                  <div class="learning-path">
-                      <h2>🛣️ Recommended Learning Path</h2>
+              <div class="content">
+                  <section id="overview" class="grid">
+                      <div class="card">
+                          <h3>🎯 Learning Objectives</h3>
+                          <p>Master core Python skills, problem-solving techniques, code organization, and best practices through progressive, structured learning.</p>
+                      </div>
+                      <div class="card">
+                          <h3>📚 Comprehensive Content</h3>
+                          <p>15+ projects, 15+ exercises, 10+ games, and complete DSA curriculum covering arrays, strings, recursion, and advanced algorithms.</p>
+                      </div>
+                      <div class="card">
+                          <h3>🛣️ Guided Learning Path</h3>
+                          <p>4-phase educational journey with weekly milestones, clear objectives, and measurable progress tracking.</p>
+                      </div>
+                      <div class="card">
+                          <h3>🤝 Community Driven</h3>
+                          <p>Collaborative learning environment with contribution opportunities, peer reviews, and shared educational resources.</p>
+                      </div>
+                  </section>
+
+                  <section id="modules" class="grid">
+                      <div class="card">
+                          <h3>🏗️ Basic Programs</h3>
+                          <p>Core Python fundamentals through practical CLI applications.</p>
+                          <div class="card-links">
+                              <a href="docs/basic-programs.html">📖 Guide</a>
+                              <a href="basic_programs/guess_number/main.py">🎮 Try First Project</a>
+                          </div>
+                      </div>
+                      <div class="card">
+                          <h3>🧩 Coding Exercises</h3>
+                          <p>Algorithm practice with 15 progressive challenges.</p>
+                          <div class="card-links">
+                              <a href="docs/exercises.html">📖 Guide</a>
+                              <a href="exercises/exercise1.py">💡 Try First Exercise</a>
+                          </div>
+                      </div>
+                      <div class="card">
+                          <h3>🎮 Interactive Games</h3>
+                          <p>Learn through play with CLI and web-based games.</p>
+                          <div class="card-links">
+                              <a href="docs/games.html">📖 Guide</a>
+                              <a href="games/game4.py">🎯 Try First Game</a>
+                          </div>
+                      </div>
+                      <div class="card">
+                          <h3>🧠 DSA Curriculum</h3>
+                          <p>Complete data structures and algorithms education.</p>
+                          <div class="card-links">
+                              <a href="docs/dsa.html">📖 Guide</a>
+                              <a href="docs/dsa-guide.html">🎓 Learning Materials</a>
+                              <a href="dsa-docs/arrays.html">📊 Array Problems</a>
+                          </div>
+                      </div>
+                  </section>
+
+                  <section id="learning-path" class="learning-path">
+                      <h2>🛣️ Your Learning Journey</h2>
 
                       <div class="phase">
                           <h4>Phase 1: Python Fundamentals (Weeks 1-2)</h4>
-                          <p>Start with basics: guess_number → calculator_cli → todo_cli</p>
-                          <p>Complete exercises 1-5 for core concepts</p>
+                          <p><strong>Focus:</strong> Core syntax, data types, control flow, functions</p>
+                          <p><strong>Activities:</strong> guess_number → calculator_cli → todo_cli + exercises 1-5</p>
+                          <p><strong>Goal:</strong> Build confidence with basic Python programming</p>
                       </div>
 
                       <div class="phase">
                           <h4>Phase 2: Intermediate Skills (Weeks 3-4)</h4>
-                          <p>Explore applications: stopwatch_cli and rock_paper_scissors</p>
-                          <p>Work through exercises 6-10 for algorithmic thinking</p>
+                          <p><strong>Focus:</strong> File I/O, data structures, game logic, error handling</p>
+                          <p><strong>Activities:</strong> stopwatch_cli → rock_paper_scissors + exercises 6-10</p>
+                          <p><strong>Goal:</strong> Develop algorithmic thinking and problem-solving skills</p>
                       </div>
 
                       <div class="phase">
                           <h4>Phase 3: Advanced Topics (Weeks 5-6)</h4>
-                          <p>Tackle complex projects: expense_tracker and file_organizer</p>
-                          <p>Master DSA patterns and complete all exercises</p>
+                          <p><strong>Focus:</strong> Complex applications, system integration, optimization</p>
+                          <p><strong>Activities:</strong> expense_tracker → file_organizer + DSA curriculum</p>
+                          <p><strong>Goal:</strong> Master advanced programming concepts and patterns</p>
                       </div>
 
                       <div class="phase">
                           <h4>Phase 4: Mastery (Ongoing)</h4>
-                          <p>Review, optimize, contribute, and teach others</p>
+                          <p><strong>Focus:</strong> Code review, optimization, teaching, contribution</p>
+                          <p><strong>Activities:</strong> Refactor projects, contribute to repository, help others</p>
+                          <p><strong>Goal:</strong> Become a proficient Python developer and educator</p>
                       </div>
-                  </div>
-
-                  <div style="text-align: center; margin: 30px 0;">
-                      <a href="https://github.com/I-invincib1e/Here-i-come-Python" class="github-link">
-                          📖 View Full Documentation on GitHub
-                      </a>
-                  </div>
-
-                  <div style="text-align: center; margin-top: 30px; opacity: 0.8;">
-                      <p>🎓 Master Python programming through structured, hands-on learning experiences</p>
-                      <p>From beginner basics to advanced algorithmic thinking</p>
-                  </div>
+                  </section>
               </div>
+
+              <footer class="footer">
+                  <p>🎓 Master Python programming through structured, hands-on learning experiences</p>
+                  <p>From beginner basics to advanced algorithmic thinking • Open source educational project</p>
+                  <p><a href="https://github.com/I-invincib1e/Here-i-come-Python" style="color: #4CAF50;">View on GitHub</a> • MIT License</p>
+              </footer>
           </body>
           </html>
           EOF
+
+          # Copy all generated HTML files to root for Pages
+          cp -r docs/* ./
+          cp -r dsa-docs/* ./
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
