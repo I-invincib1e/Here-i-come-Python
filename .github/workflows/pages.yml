@@ -10,9 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+# Cancel any previous runs to avoid conflicts with Jekyll/MkDocs
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
