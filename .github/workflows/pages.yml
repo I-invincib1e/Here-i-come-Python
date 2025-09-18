@@ -1,0 +1,250 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create index.html from README.md
+        run: |
+          # Create a simple HTML page from README.md
+          cat > index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Python Learning Guide</title>
+              <style>
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                      line-height: 1.6;
+                      max-width: 800px;
+                      margin: 0 auto;
+                      padding: 20px;
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      min-height: 100vh;
+                      color: white;
+                  }
+                  .container {
+                      background: rgba(255, 255, 255, 0.1);
+                      backdrop-filter: blur(10px);
+                      border-radius: 20px;
+                      padding: 30px;
+                      margin: 20px 0;
+                      border: 1px solid rgba(255, 255, 255, 0.2);
+                  }
+                  h1 {
+                      text-align: center;
+                      font-size: 2.5em;
+                      margin-bottom: 10px;
+                      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                  }
+                  .subtitle {
+                      text-align: center;
+                      font-size: 1.2em;
+                      opacity: 0.9;
+                      margin-bottom: 30px;
+                  }
+                  .quick-start {
+                      background: rgba(255, 255, 255, 0.2);
+                      border-radius: 15px;
+                      padding: 25px;
+                      margin: 20px 0;
+                      border-left: 5px solid #4CAF50;
+                  }
+                  .quick-start h2 {
+                      margin-top: 0;
+                      color: #4CAF50;
+                      font-size: 1.8em;
+                  }
+                  .step {
+                      background: rgba(255, 255, 255, 0.1);
+                      margin: 10px 0;
+                      padding: 15px;
+                      border-radius: 10px;
+                      border-left: 4px solid #2196F3;
+                  }
+                  .step-number {
+                      display: inline-block;
+                      background: #2196F3;
+                      color: white;
+                      width: 25px;
+                      height: 25px;
+                      border-radius: 50%;
+                      text-align: center;
+                      line-height: 25px;
+                      margin-right: 10px;
+                      font-weight: bold;
+                  }
+                  .github-link {
+                      display: inline-block;
+                      background: #333;
+                      color: white;
+                      padding: 15px 30px;
+                      text-decoration: none;
+                      border-radius: 10px;
+                      margin: 20px 0;
+                      font-weight: bold;
+                      transition: background 0.3s;
+                  }
+                  .github-link:hover {
+                      background: #555;
+                  }
+                  .features {
+                      display: grid;
+                      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                      gap: 20px;
+                      margin: 30px 0;
+                  }
+                  .feature {
+                      background: rgba(255, 255, 255, 0.1);
+                      padding: 20px;
+                      border-radius: 10px;
+                      text-align: center;
+                  }
+                  .feature h3 {
+                      color: #4CAF50;
+                      margin-top: 0;
+                  }
+                  .learning-path {
+                      background: rgba(255, 255, 255, 0.1);
+                      border-radius: 15px;
+                      padding: 25px;
+                      margin: 20px 0;
+                  }
+                  .phase {
+                      background: rgba(255, 255, 255, 0.1);
+                      margin: 10px 0;
+                      padding: 15px;
+                      border-radius: 10px;
+                      border-left: 4px solid #FF9800;
+                  }
+                  .phase h4 {
+                      margin-top: 0;
+                      color: #FF9800;
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>🚀 Python Learning Guide</h1>
+                  <p class="subtitle">Complete Programming Education Through Hands-On Practice</p>
+
+                  <div class="quick-start">
+                      <h2>⚡ Quick Start (5 minutes)</h2>
+                      <div class="step">
+                          <span class="step-number">1</span>
+                          <strong>Install Python</strong> (3.8+): Download from <a href="https://python.org" style="color: #4CAF50;">python.org</a>
+                      </div>
+                      <div class="step">
+                          <span class="step-number">2</span>
+                          <strong>Clone this repo</strong>:<br>
+                          <code style="background: rgba(0,0,0,0.3); padding: 5px; border-radius: 5px;">git clone https://github.com/I-invincib1e/Here-i-come-Python.git</code>
+                      </div>
+                      <div class="step">
+                          <span class="step-number">3</span>
+                          <strong>Run your first program</strong>:<br>
+                          <code style="background: rgba(0,0,0,0.3); padding: 5px; border-radius: 5px;">python basic_programs/guess_number/main.py</code>
+                      </div>
+                      <div class="step">
+                          <span class="step-number">4</span>
+                          <strong>Follow the learning path below to become a Python expert!</strong>
+                      </div>
+                  </div>
+
+                  <div class="features">
+                      <div class="feature">
+                          <h3>📚 Structured Learning</h3>
+                          <p>4-phase educational journey from beginner to advanced</p>
+                      </div>
+                      <div class="feature">
+                          <h3>🎯 Clear Objectives</h3>
+                          <p>Specific learning goals and measurable outcomes</p>
+                      </div>
+                      <div class="feature">
+                          <h3>🛣️ Guided Path</h3>
+                          <p>Weekly milestones and progress tracking</p>
+                      </div>
+                      <div class="feature">
+                          <h3>🤝 Community</h3>
+                          <p>Collaborative learning and contribution opportunities</p>
+                      </div>
+                  </div>
+
+                  <div class="learning-path">
+                      <h2>🛣️ Recommended Learning Path</h2>
+
+                      <div class="phase">
+                          <h4>Phase 1: Python Fundamentals (Weeks 1-2)</h4>
+                          <p>Start with basics: guess_number → calculator_cli → todo_cli</p>
+                          <p>Complete exercises 1-5 for core concepts</p>
+                      </div>
+
+                      <div class="phase">
+                          <h4>Phase 2: Intermediate Skills (Weeks 3-4)</h4>
+                          <p>Explore applications: stopwatch_cli and rock_paper_scissors</p>
+                          <p>Work through exercises 6-10 for algorithmic thinking</p>
+                      </div>
+
+                      <div class="phase">
+                          <h4>Phase 3: Advanced Topics (Weeks 5-6)</h4>
+                          <p>Tackle complex projects: expense_tracker and file_organizer</p>
+                          <p>Master DSA patterns and complete all exercises</p>
+                      </div>
+
+                      <div class="phase">
+                          <h4>Phase 4: Mastery (Ongoing)</h4>
+                          <p>Review, optimize, contribute, and teach others</p>
+                      </div>
+                  </div>
+
+                  <div style="text-align: center; margin: 30px 0;">
+                      <a href="https://github.com/I-invincib1e/Here-i-come-Python" class="github-link">
+                          📖 View Full Documentation on GitHub
+                      </a>
+                  </div>
+
+                  <div style="text-align: center; margin-top: 30px; opacity: 0.8;">
+                      <p>🎓 Master Python programming through structured, hands-on learning experiences</p>
+                      <p>From beginner basics to advanced algorithmic thinking</p>
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
