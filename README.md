@@ -8,6 +8,22 @@
 
 **Your complete journey to mastering Python programming** through structured, hands-on learning experiences. This repository provides a comprehensive educational framework that takes you from beginner basics to advanced algorithmic thinking, with clear learning objectives, progressive difficulty, and practical projects that build real programming skills.
 
+## ⚡ Quick Start (5 minutes)
+
+**New to Python?** Start here:
+
+1. **Install Python** (3.8+): Download from [python.org](https://python.org)
+2. **Clone this repo**:
+   ```bash
+   git clone https://github.com/I-invincib1e/Here-i-come-Python.git
+   cd Here-i-come-Python
+   ```
+3. **Run your first program**:
+   ```bash
+   python basic_programs/guess_number/main.py
+   ```
+4. **Follow the learning path** below to become a Python expert!
+
 ## 🎯 Comprehensive Learning Objectives
 
 ### Programming Fundamentals
