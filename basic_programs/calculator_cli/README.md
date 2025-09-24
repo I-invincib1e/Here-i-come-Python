@@ -24,6 +24,19 @@ A tiny REPL that parses and evaluates expressions using `+ - * / ^`.
 - Operators are mapped to Python’s `operator` functions
 - Errors are shown as simple messages in the REPL
 
+## Industry Applications
+
+**Where Calculator Logic is Used in the Real World:**
+
+- **Financial Software**: Banks and fintech apps use similar expression evaluation for interest calculations, loan payments, and investment formulas
+- **Scientific Computing**: Research software evaluates mathematical expressions for simulations, data analysis, and computational models
+- **E-commerce Platforms**: Price calculations, tax computations, and discount applications use arithmetic expression parsing
+- **Spreadsheet Applications**: Excel, Google Sheets use similar logic for formula evaluation and cell calculations
+- **Engineering Tools**: CAD software, simulation tools evaluate mathematical expressions for design calculations
+- **Data Science**: Pandas, NumPy libraries perform vectorized arithmetic operations similar to this calculator's logic
+
+**Learning Connection:** This simple calculator demonstrates the foundation of expression evaluation used in complex systems like database query engines, programming language interpreters, and financial trading platforms.
+
 ## Notes
 
 - Operators require spaces (e.g., `2 + 3`, not `2+3`)

@@ -20,6 +20,19 @@ Date        Category       Amount   Description
 Total: 34.90
 ```
 
+## Industry Applications
+
+**Where Expense Tracking Logic is Used in the Real World:**
+
+- **Financial Software**: Mint, YNAB, QuickBooks use similar data structures for transaction processing and categorization
+- **E-commerce Analytics**: Amazon, Shopify track order values, shipping costs, and revenue by category
+- **Business Intelligence**: Tableau, Power BI aggregate sales data by time periods and product categories
+- **Banking Systems**: Core banking applications process millions of transactions daily with similar grouping logic
+- **Accounting Software**: SAP, Oracle Financials use CSV/Excel imports for expense reporting and tax calculations
+- **Data Warehousing**: ETL processes in companies like Airbnb, Uber aggregate operational metrics by categories
+
+**Learning Connection:** This expense tracker demonstrates the foundation of data aggregation used in enterprise systems. The same patterns power financial dashboards, sales analytics, and operational reporting in Fortune 500 companies.
+
 ## Internals
 
 - CSV read/write helpers in `shared/path_utils.py`

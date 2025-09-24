@@ -37,6 +37,10 @@ dev = [
     "jupyter",
     "ipykernel",
 ]
+visualization = [
+    "matplotlib>=3.5.0",
+    "numpy>=1.21.0",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["dsa/tests", "basic_programs"]

@@ -72,6 +72,29 @@ python -m pytest dsa/tests/test_arrays.py -v
 python -m pytest dsa/tests/ --cov=dsa.problems --cov-report=html
 ```
 
+## 📊 Performance Analysis & Visualization
+
+**Compare Algorithm Approaches:**
+```bash
+# Benchmark different implementations
+python -c "from dsa.utils.benchmark import compare_two_sum_algorithms; compare_two_sum_algorithms()"
+```
+
+**Visual Learning:**
+```bash
+# Install visualization dependencies
+pip install -e .[visualization]
+
+# Visualize Kadane's algorithm
+python -c "from dsa.visualization.kadane_visualizer import demonstrate_kadane_visualization; demonstrate_kadane_visualization()"
+```
+
+**What You'll Learn:**
+- **Algorithm Evolution**: See how brute force approaches evolve into optimized solutions
+- **Performance Trade-offs**: Understand time-space complexity through real benchmarks
+- **Visual Intuition**: Watch algorithms work step-by-step with interactive visualizations
+- **Optimization Patterns**: Recognize common techniques for improving efficiency
+
 ## 📈 Skill Progression
 
 - **Beginner**: Implement basic algorithms, understand time complexity

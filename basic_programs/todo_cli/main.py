@@ -89,18 +89,24 @@ def print_help() -> None:
 
 
 def process_command(line: str) -> None:
+    # Parse command line into command and arguments
     parts = line.strip().split()
     if not parts:
         return
     cmd, *args = parts
+
+    # Handle different command types with appropriate validation
     if cmd == "add":
+        # Add command requires at least one argument for the title
         if not args:
             print("Usage: add <title>")
             return
         add(" ".join(args))
     elif cmd == "list":
+        # List command takes no arguments
         list_todos()
     elif cmd in {"done", "del"}:
+        # Done/delete commands require exactly one numeric argument
         if len(args) != 1 or not args[0].isdigit():
             print(f"Usage: {cmd} <id>")
             return
@@ -110,8 +116,10 @@ def process_command(line: str) -> None:
         else:
             delete(todo_id)
     elif cmd in {"help", "-h", "--help"}:
+        # Help command with multiple possible formats
         print_help()
     else:
+        # Unknown command - show usage guidance
         print("Unknown command. Type 'help' for usage.")
 
 
@@ -124,5 +132,3 @@ if __name__ == "__main__":
     import sys
 
     main(sys.argv[1:])
-
-
