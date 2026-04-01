@@ -1,4 +1,5 @@
 import time
+import csv
 from typing import Optional
 
 from shared.cli_utils import create_repl_loop
@@ -30,6 +31,19 @@ def process_command(cmd: str, state: dict) -> None:
             current_elapsed = elapsed + (now - start_time)
             laps.append(current_elapsed)
             print(f"Lap {len(laps)}: {format_duration(current_elapsed)}")
+    elif cmd == "lap export":
+        if not laps:
+            print("No laps to export.")
+        else:
+            with open("laps.csv", "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(["Lap", "Total Time", "Duration"])
+                prev_total = 0.0
+                for i, total in enumerate(laps, 1):
+                    duration = total - prev_total
+                    writer.writerow([i, f"{total:.3f}", f"{duration:.3f}"])
+                    prev_total = total
+            print("Laps exported to laps.csv.")
     elif cmd == "stop":
         if start_time is None:
             print("Not running.")

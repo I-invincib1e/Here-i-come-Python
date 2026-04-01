@@ -7,6 +7,7 @@ A simple interactive stopwatch with laps.
 - Maintains state: `start_time`, `elapsed`, and `laps`
 - `start`: begins timing (idempotent)
 - `lap`: records current total elapsed time
+- `lap export`: writes laps to `laps.csv`
 - `stop`: freezes time and accumulates into `elapsed`
 - `reset`: clears time and laps
 - `exit`/`q`: prints final time and quits
